@@ -19,6 +19,13 @@
  */
 
 @theme inline {
+  --font-sans: "Lexend", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Lexend", ui-monospace, monospace;
+  --color-brand-green: var(--brand-green);
+  --color-brand-amber: var(--brand-amber);
+  --color-brand-clay: var(--brand-clay);
+  --color-brand-earth: var(--brand-earth);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -62,7 +69,12 @@
 }
 
 :root {
-  --radius: 0.625rem;
+  --radius: 1rem;
+  --brand-green: oklch(0.404 0.084 165.3);
+  --brand-amber: oklch(0.788 0.163 71.5);
+  --brand-clay: oklch(0.98 0.014 70);
+  --brand-earth: oklch(0.375 0.09 55);
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
