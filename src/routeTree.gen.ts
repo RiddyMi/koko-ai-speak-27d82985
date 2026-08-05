@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as CreditRouteImport } from './routes/credit'
 import { Route as LedgerRouteImport } from './routes/ledger'
 import { Route as StockRouteImport } from './routes/stock'
@@ -17,6 +18,11 @@ import { Route as StockRouteImport } from './routes/stock'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreditRoute = CreditRouteImport.update({
@@ -37,12 +43,14 @@ const StockRoute = StockRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/credit': typeof CreditRoute
   '/ledger': typeof LedgerRoute
   '/stock': typeof StockRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/credit': typeof CreditRoute
   '/ledger': typeof LedgerRoute
   '/stock': typeof StockRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/credit': typeof CreditRoute
   '/ledger': typeof LedgerRoute
   '/stock': typeof StockRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/credit' | '/ledger' | '/stock'
+  fullPaths: '/' | '/assistant' | '/credit' | '/ledger' | '/stock'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/credit' | '/ledger' | '/stock'
-  id: '__root__' | '/' | '/credit' | '/ledger' | '/stock'
+  to: '/' | '/assistant' | '/credit' | '/ledger' | '/stock'
+  id: '__root__' | '/' | '/assistant' | '/credit' | '/ledger' | '/stock'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistantRoute: typeof AssistantRoute
   CreditRoute: typeof CreditRoute
   LedgerRoute: typeof LedgerRoute
   StockRoute: typeof StockRoute
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/credit': {
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistantRoute: AssistantRoute,
   CreditRoute: CreditRoute,
   LedgerRoute: LedgerRoute,
   StockRoute: StockRoute,
