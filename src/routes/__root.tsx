@@ -85,17 +85,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Run your business by talking. Kòkọ AI records sales, expenses, stock and credit from natural speech in English, Pidgin, Yorùbá, Hausa and Igbo.",
+          "Record sales, expenses, stock and credit by speaking English, Pidgin, Yorùbá, Hausa or Igbo. Kòkọ AI keeps your books for you.",
       },
       { name: "author", content: "Kòkọ AI" },
       { name: "theme-color", content: "#065f46" },
       { property: "og:title", content: "Kòkọ AI — Voice Bookkeeping for African Traders" },
       {
         property: "og:description",
-        content: "The multilingual voice business assistant for African traders.",
+        content: "Record sales, expenses, stock and credit by speaking English, Pidgin, Yorùbá, Hausa or Igbo. Kòkọ AI keeps your books for you.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Kòkọ AI — Voice Bookkeeping for African Traders" },
+      { name: "twitter:description", content: "Record sales, expenses, stock and credit by speaking English, Pidgin, Yorùbá, Hausa or Igbo. Kòkọ AI keeps your books for you." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/06a21c90-0e5b-4460-9649-59f814c487ac/id-preview-7bd16bea--2df24f4c-3218-4811-9b38-3a2fa07b2daf.lovable.app-1785940935365.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/06a21c90-0e5b-4460-9649-59f814c487ac/id-preview-7bd16bea--2df24f4c-3218-4811-9b38-3a2fa07b2daf.lovable.app-1785940935365.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

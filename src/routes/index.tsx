@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Kòkọ AI — Voice Bookkeeping for African Traders" },
       {
         property: "og:description",
-        content: "Speak your sales. Kòkọ AI turns everyday market talk into clean business records.",
+        content: "Record sales, expenses, stock and credit by speaking English, Pidgin, Yorùbá, Hausa or Igbo. Kòkọ AI keeps your books for you.",
       },
     ],
   }),
