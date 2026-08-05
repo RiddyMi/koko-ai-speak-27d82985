@@ -19,6 +19,13 @@
  */
 
 @theme inline {
+  --font-sans: "Lexend", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Lexend", ui-monospace, monospace;
+  --color-brand-green: var(--brand-green);
+  --color-brand-amber: var(--brand-amber);
+  --color-brand-clay: var(--brand-clay);
+  --color-brand-earth: var(--brand-earth);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
