@@ -54,11 +54,18 @@ export const transcribeAudio = createServerFn({ method: "POST" })
   })
   .handler(async ({ data }) => {
     const bytes = Uint8Array.from(atob(data.audioBase64), (c) => c.charCodeAt(0));
-    if (bytes.byteLength < 2048) throw new Error("That recording was empty — please try again.");
+    if (bytes.byteLength < 16000) throw new Error("That recording was empty — please try again.");
 
     const form = new FormData();
     form.append("model", "openai/gpt-4o-transcribe");
     form.append("file", new Blob([bytes], { type: "audio/wav" }), "recording.wav");
+    // Keep the model in West African languages instead of drifting to unrelated
+    // languages (e.g. Russian) when the audio is short or noisy.
+    form.append(
+      "prompt",
+      "A Nigerian market trader speaking English, Nigerian Pidgin, Yorùbá, Hausa or Igbo about sales, expenses and credit in Naira. Transcribe only in English, Nigerian Pidgin, Yorùbá, Hausa or Igbo.",
+    );
+
 
     const res = await fetch(`${GATEWAY}/audio/transcriptions`, {
       method: "POST",
@@ -87,7 +94,7 @@ export const parseTransaction = createServerFn({ method: "POST" })
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash",
+        model: "google/gemini-2.5-flash",
         messages: [
           { role: "system", content: SYSTEM },
           { role: "user", content: data.text },
@@ -118,7 +125,7 @@ export const askAssistant = createServerFn({ method: "POST" })
       method: "POST",
       headers: { "Lovable-API-Key": key(), "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "google/gemini-3-flash",
+        model: "google/gemini-2.5-flash",
         messages: [
           {
             role: "system",
