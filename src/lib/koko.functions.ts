@@ -59,6 +59,13 @@ export const transcribeAudio = createServerFn({ method: "POST" })
     const form = new FormData();
     form.append("model", "openai/gpt-4o-transcribe");
     form.append("file", new Blob([bytes], { type: "audio/wav" }), "recording.wav");
+    // Keep the model in West African languages instead of drifting to unrelated
+    // languages (e.g. Russian) when the audio is short or noisy.
+    form.append(
+      "prompt",
+      "A Nigerian market trader speaking English, Nigerian Pidgin, Yorùbá, Hausa or Igbo about sales, expenses and credit in Naira. Transcribe only in English, Nigerian Pidgin, Yorùbá, Hausa or Igbo.",
+    );
+
 
     const res = await fetch(`${GATEWAY}/audio/transcriptions`, {
       method: "POST",
