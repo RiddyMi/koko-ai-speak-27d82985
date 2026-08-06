@@ -87,7 +87,7 @@ export const parseTransaction = createServerFn({ method: "POST" })
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash",
+        model: "google/gemini-2.5-flash",
         messages: [
           { role: "system", content: SYSTEM },
           { role: "user", content: data.text },
@@ -118,7 +118,7 @@ export const askAssistant = createServerFn({ method: "POST" })
       method: "POST",
       headers: { "Lovable-API-Key": key(), "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "google/gemini-3-flash",
+        model: "google/gemini-2.5-flash",
         messages: [
           {
             role: "system",
