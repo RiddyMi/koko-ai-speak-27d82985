@@ -54,7 +54,7 @@ export const transcribeAudio = createServerFn({ method: "POST" })
   })
   .handler(async ({ data }) => {
     const bytes = Uint8Array.from(atob(data.audioBase64), (c) => c.charCodeAt(0));
-    if (bytes.byteLength < 2048) throw new Error("That recording was empty — please try again.");
+    if (bytes.byteLength < 16000) throw new Error("That recording was empty — please try again.");
 
     const form = new FormData();
     form.append("model", "openai/gpt-4o-transcribe");
