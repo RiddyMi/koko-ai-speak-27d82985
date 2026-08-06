@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   seedTransactions,
   seedProducts,
@@ -36,10 +36,14 @@ export function KokoProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<Product[]>(seedProducts);
   const [credit, setCredit] = useState<CreditAccount[]>(seedCredit);
   const [language, setLanguage] = useState("EN");
+  // Date-dependent totals must not run during SSR/prerender: the build date
+  // differs from the visitor's date, which caused a hydration mismatch.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
 
   const value = useMemo<KokoState>(() => {
     const isToday = (t: Transaction) =>
-      new Date(t.at).toDateString() === new Date().toDateString();
+      hydrated && new Date(t.at).toDateString() === new Date().toDateString();
     const todaySales = transactions
       .filter((t) => isToday(t) && (t.type === "sale" || t.type === "repayment"))
       .reduce((n, t) => n + t.amount, 0);
@@ -149,7 +153,7 @@ export function KokoProvider({ children }: { children: ReactNode }) {
         ]);
       },
     };
-  }, [transactions, products, credit, language]);
+  }, [transactions, products, credit, language, hydrated]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
