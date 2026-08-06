@@ -153,7 +153,7 @@ export function KokoProvider({ children }: { children: ReactNode }) {
         ]);
       },
     };
-  }, [transactions, products, credit, language]);
+  }, [transactions, products, credit, language, hydrated]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
